@@ -3,9 +3,8 @@ import taskReducer from "../reducers/taskReducer";
 
 export const store = configureStore({
     reducer: {
-        tasks: taskReducer
+        tasks: taskReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });
 
 export type RootState = ReturnType<typeof store.getState>;

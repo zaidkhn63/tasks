@@ -1,0 +1,12 @@
+/* Task item specific styles */
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+}

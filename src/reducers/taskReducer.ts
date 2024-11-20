@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK, TOGGLE_TASK, SET_TASKS } from "../actions/taskActions";
+import { ADD_TASK, TOGGLE_TASK, DELETE_TASK, SET_TASKS } from "../actions/taskActions";
 import { Task } from "../types";
 
 interface State {
@@ -6,32 +6,32 @@ interface State {
 }
 
 const initialState: State = {
-    tasks: []
+    tasks: [],
 };
 
-const taskReducer = (state = initialState, action: any): State => {
+const taskReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case ADD_TASK:
-            return { 
-                ...state, 
-                tasks: [...state.tasks, { id: Date.now(), title: action.payload, completed: false }] 
-            };
-        case DELETE_TASK:
-            return { 
-                ...state, 
-                tasks: state.tasks.filter((task) => task.id !== action.payload) 
-            };
-        case TOGGLE_TASK:
+        case 'ADD_TASK':
             return {
                 ...state,
-                tasks: state.tasks.map((task) => 
-                    task.id === action.payload ? { ...task, completed: !task.completed } : task
-                )
+                tasks: [
+                    ...state.tasks,
+                    { id: Date.now(), title: action.payload, completed: false },
+                ],
             };
-        case SET_TASKS:
-            return { 
-                ...state, 
-                tasks: action.payload 
+        case 'DELETE_TASK':
+            return {
+                ...state,
+                tasks: state.tasks.filter((task) => task.id !== action.payload),
+            };
+        case 'TOGGLE_TASK':
+            return {
+                ...state,
+                tasks: state.tasks.map((task) =>
+                    task.id === action.payload
+                        ? { ...task, completed: !task.completed }
+                        : task
+                ),
             };
         default:
             return state;
@@ -39,3 +39,4 @@ const taskReducer = (state = initialState, action: any): State => {
 };
 
 export default taskReducer;
+

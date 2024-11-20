@@ -1,14 +1,12 @@
-import React from 'react';
-import TaskList from './components/TaskList';
-import { store } from './store/store';
-import { Provider } from 'react-redux';
+import React from "react";
+import TaskList from "./components/TaskList";
 
 const App: React.FC = () => {
-  return (
-    <Provider store={store}>
-      <TaskList />
-    </Provider>
-  );
+    return (
+        <div className="App">
+            <TaskList />
+        </div>
+    );
 };
 
 export default App;
