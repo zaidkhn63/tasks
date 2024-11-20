@@ -1,39 +1,41 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { Task } from "../types";
-
-export interface Task {
-    id:number;
-    title:string;
-    completed:boolean;
-}
+import { ADD_TASK, DELETE_TASK, TOGGLE_TASK, SET_TASKS } from "../actions/taskActions";
+import { Task } from "../types";
 
 interface State {
-    tasks:Task[];
+    tasks: Task[];
 }
 
 const initialState: State = {
-    tasks:[]
+    tasks: []
+};
 
-}
-
-const taskReducer = (state= initialState, action:any) =>{
-    switch (action.type){
-        case 'ADD_TASK':
-            return{...state,tasks:[...state.tasks,{id:Date.now(), title: action.payload, commpleted:false}]}
-
-        case 'DELETE_TASK':
-            return{...state,tasks:state.tasks.filter((task) => task.id !== action.payload)}
-
-        case 'TOGGLE_TASK' :
+const taskReducer = (state = initialState, action: any): State => {
+    switch (action.type) {
+        case ADD_TASK:
+            return { 
+                ...state, 
+                tasks: [...state.tasks, { id: Date.now(), title: action.payload, completed: false }] 
+            };
+        case DELETE_TASK:
+            return { 
+                ...state, 
+                tasks: state.tasks.filter((task) => task.id !== action.payload) 
+            };
+        case TOGGLE_TASK:
             return {
                 ...state,
-                tasks:state.tasks.map((task) => task.id === action.payload ? {...task,completed:!task.completed} : task)
+                tasks: state.tasks.map((task) => 
+                    task.id === action.payload ? { ...task, completed: !task.completed } : task
+                )
             };
-
-            default:
-                return state;
-        
+        case SET_TASKS:
+            return { 
+                ...state, 
+                tasks: action.payload 
+            };
+        default:
+            return state;
     }
-}
+};
 
 export default taskReducer;
